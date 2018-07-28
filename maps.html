@@ -10,6 +10,8 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
+    <link rel="stylesheet" type="text/css" href="styles.css">
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -17,19 +19,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height:400px;
-        width:90%;
-        margin: auto;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
+
     </style>
   </head>
   <body>
@@ -56,12 +46,40 @@
         });
       }
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBku3hBLJBxxZobKjiTq0Xx1kOacZwAjzA&callback=initMap"
-    async defer></script>
+    <script
+    // For Map 1
+     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBku3hBLJBxxZobKjiTq0Xx1kOacZwAjzA&callback=initMap"
+    async defer>
+    </script>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
+
+
+    <!-- Run an AJAX call onto the Geocode URL & Process the response-->
+    <script type="text/javascript">
+      /*We have to use AJAX because it is the only type of function that allows
+      us to specify what TYPE of data we want to get & we need to specify that we want xml
+      data here*/
+      $.ajax({
+        type:"GET",
+        url:"https://maps.googleapis.com/maps/api/geocode/xml?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyBku3hBLJBxxZobKjiTq0Xx1kOacZwAjzA",
+        dataType:"xml",
+        success: processXML
+      });
+
+      function processXML(xml){
+        //alert(xml);
+      /*  $(xml).find("address_component").each(function() {
+          if ($(this).find("type").text() == "postal_code"){
+            alert($(this).find("long_name").text());
+          };
+        }); */
+        //Find the full address
+        alert($(xml).find("formatted_address").text());
+      };
+    </script>
   </body>
 </html>
