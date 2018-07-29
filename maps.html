@@ -72,13 +72,13 @@
 
       function processXML(xml){
         //alert(xml);
-      /*  $(xml).find("address_component").each(function() {
+        $(xml).find("address_component").each(function() {
           if ($(this).find("type").text() == "postal_code"){
             alert($(this).find("long_name").text());
           };
-        }); */
-        //Find the full address
-        alert($(xml).find("formatted_address").text());
+        });
+
+        //alert($(xml).find("formatted_address").text());
       };
     </script>
   </body>
